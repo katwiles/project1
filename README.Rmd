@@ -19,9 +19,7 @@ Once I learned how to phyloseq, I played around with the sample data to produce 
 
 ###Methods
 
-First I followed the [preprocessing tutorial](http://joey711.github.io/phyloseq/preprocess.html).
-
-
+First I followed the [preprocessing tutorial](http://joey711.github.io/phyloseq/preprocess.html) with the GlobalPatterns data set within phyloseq. In which samples were removed if they were not seen more than 3 times in at least 20 of the samples. I also learned how to subset samples into varying taxonomic levels. 
 
 
 ```{r, echo=FALSE}
@@ -33,6 +31,7 @@ n.s<-nsamples(GlobalPatterns) #exploring data: number of samples
 
 ```{r, echo=FALSE}
 #preprocessing
+#to learn more about Globalpatterns data set see `?`(GlobalPatterns)
 gpr  <- transform_sample_counts(GlobalPatterns, function(x) x / sum(x)) #transform data to relative abundance
 gpfr <- filter_taxa(gpr, function(x) mean(x) > 1e-5, TRUE) # filter taxa so only OTUs mean greater than 10^-5kept
 gp.ch <- subset_taxa(GlobalPatterns, Phylum=="Chlamydiae") # pulling out samples in phylum Chlamidiae
@@ -62,8 +61,40 @@ gps <- transform_sample_counts(gp, standf)
 gpsf <- filter_taxa(gps, function(x) sd(x)/mean(x) > 3.0, TRUE) #Filter the taxa using a cutoff of 3.0 for the Coefficient of Variation
 
 gpsfb <- subset_taxa(gpsf, Phylum=="Bacteroidetes") #Subset the data to Bacteroidetes, used in some plots
-
 ```
+
+
+Next, I followed the [richness tutorial](http://joey711.github.io/phyloseq/plot_richness-examples.html). The first figure is plotting the richness of the OTUs in the Global Patterns data set. The graph is showing the different ways to measure alpha diversity. I added in color per sample type (NT) (not in tutorial). 
+
+
+```{r, echo=FALSE, fig.height=6, fig.width=10}
+#richness example
+
+#setting up
+library("ggplot2")
+pv <- packageVersion("ggplot2") #version 1.0.0
+
+theme_set(theme_bw())
+pal = "Set1"
+scale_colour_discrete <- function(palname = pal, ...) {
+    scale_colour_brewer(palette = palname, ...)
+}
+scale_fill_discrete <- function(palname = pal, ...) {
+    scale_fill_brewer(palette = palname, ...)
+}
+
+
+gp <- prune_taxa(taxa_sums(GlobalPatterns) > 0, GlobalPatterns) #prune OTUs not present
+plot_richness(gp, color="SampleType")
+```
+
+Then, I looked at just the shannon graph (NT). 
+```{r, echo=FALSE}
+plot_richness(gp, color="SampleType", measures="Shannon")
+```
+
+
+
 
 
 
