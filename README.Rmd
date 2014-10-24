@@ -10,40 +10,19 @@ output: html_document
 
 ###Introduction
 
+When I started on this project, I originally wanted to work with some data from my lab. I struggled with the data processing, which took much more time than expcected. I then got a data set that had already been processed and tried playing around with the package [phyloseq](http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0061217). Phyloseq is an R package that is used to visualize microbiome sample data. I had difficulty using the package with the data that I was given. For example, I was trying to make a relative abundance graph and I could not get the code to work. 
 
+Instead of continuing with this project, I decided to scrap the whole thing and try to see if I could use the sample data on the [phyloseq website](http://joey711.github.io/phyloseq/) and reproduce many of the figures that are in the tutorial. The phyloseq package is designed to help scientists with reproducible data. I thought it would be interesting to see how reproducible their website is. 
 
-Your document should layout your question in the introductionIntroduction, provide a brief synopsis for why it is important, 
+Once I learned how to phyloseq, I played around with the sample data to produce some new figures and graphs. #expand upon this. 
 
 
 ###Methods
-PET Plastic bottles were placed in three different stations (Dowsing, Gabbard, and Warp) in the North Sea (Fig 1), and were collected in different seasons (Spring, Summer, and Winter) by Dr. Sonja Oberbeckmann, IO-Warnemuende; and Dr. Melissa Duhaime, University of Michigan. DNA was extracted from the bottles and sequenced using Illumina sequencer. Sequence data was processed by Dr. Duhaime. I received OTU tables and sample data from Dr. Duhaime. 
 
-
-
-<img src="C:\Users\Kat\Desktop\project 1\project1\fig1.png"/>
-
-
-
-
-describe your general approach to analyzing the data
 
 
 
 ```{r, echo=FALSE}
-otu.table <- read.table(file="PET_otutab.tsv", header=TRUE)
-otu.taxa<-read.table (file="PET_otutable_taxa.tsv", header=TRUE)
-sample.data<-read.table (file="PET_sample_data.tsv", header=TRUE)
-
-library("phyloseq")
-otu <- otu_table(otu.table, taxa_are_rows=TRUE) 
+library("phyloseq") #load phyloseq library
 ```
 
-
-
-
-###Results
-a summary of your results, 
-
-
-###Discussion
- and mention of what your future directions would be.
