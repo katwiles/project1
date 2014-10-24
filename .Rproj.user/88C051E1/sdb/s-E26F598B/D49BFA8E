@@ -1,0 +1,16 @@
+{
+    "contents" : "---\ntitle: \"Project 1\"\nauthor: \"Kat Wiles\"\ndate: \"Friday, October 24, 2014\"\noutput: html_document\n---\n\n\n\n\n###Introduction\n\n\n\nYour document should layout your question in the introductionIntroduction, provide a brief synopsis for why it is important, \n\n\n###Methods\nPET Plastic bottles were placed in three different stations (Dowsing, Gabbard, and Warp) in the North Sea (Fig 1), and were collected in different seasons (Spring, Summer, and Winter) by Dr. Sonja Oberbeckmann, IO-Warnemuende; and Dr. Melissa Duhaime, University of Michigan. DNA was extracted from the bottles and sequenced using Illumina sequencer. Sequence data was processed by Dr. Duhaime. I received OTU tables and sample data from Dr. Duhaime. \n\n\n\n<img src=\"C:\\Users\\Kat\\Desktop\\project 1\\fig1.png\"/>\n\n\n\n\ndescribe your general approach to analyzing the data\n\n\n\n```{r, echo=FALSE}\notu.table <- read.table(file=\"PET_otutab.tsv\", header=TRUE)\notu.taxa<-read.table (file=\"PET_otutable_taxa.tsv\", header=TRUE)\nsample.data<-read.table (file=\"PET_sample_data.tsv\", header=TRUE)\n\nlibrary(\"phyloseq\")\notu <- otu_table(otu.table, taxa_are_rows=TRUE) \n```\n\n\n\n\n###Results\na summary of your results, \n\n\n###Discussion\n and mention of what your future directions would be.\n",
+    "created" : 1414175564627.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "305071863",
+    "id" : "D49BFA8E",
+    "lastKnownWriteTime" : 1414175679,
+    "path" : "C:/Users/Kat/Desktop/project 1/README.Rmd",
+    "project_path" : null,
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_markdown"
+}
