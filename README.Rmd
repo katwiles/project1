@@ -95,6 +95,32 @@ plot_richness(gp, color="SampleType", measures="Shannon")
 
 
 
+```{r, echo=FALSE}
+#starting ordination
+theme_set(theme_bw())
+
+#Remove OTUs that do not show appear more than 5 times in more than half the samples
+gp <- GlobalPatterns 
+wh0 <- genefilter_sample(gp, filterfun_sample(function(x) x > 5), A = 0.5 * nsamples(gp))
+gp1 = prune_taxa(wh0, gp)
+
+#Transform to even sampling depth.
+gp1 <- transform_sample_counts(gp1, function(x) 1e+06 * x/sum(x))
+
+
+#Keep only the most abundant five phyla.
+
+phylum.sum <- tapply(taxa_sums(gp1), tax_table(gp1)[, "Phylum"], sum, na.rm = TRUE)
+top5phyla <- names(sort(phylum.sum, TRUE))[1:5]
+gp1 <- prune_taxa((tax_table(gp1)[, "Phylum"] %in% top5phyla), gp1)
+
+#Define a human-associated versus non-human categorical variable:
+
+human <- get_variable(gp1, "SampleType") %in% c("Feces", "Mock", "Skin", "Tongue")
+sample_data(gp1)$human <- factor(human)
+
+
+```
 
 
 
