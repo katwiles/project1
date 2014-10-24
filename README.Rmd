@@ -9,19 +9,20 @@ output: html_document
 ```{r, echo=FALSE}
 otu <- read.table(file="PET_otutab.tsv", header=TRUE)
 otu.taxa<-read.table(file="PET_otutable_taxa.tsv", header=TRUE)
-sample<-read.table(file="PET_sample_data.tsv", header=TRUE)
+sample.data<-read.table(file="PET_sample_data.tsv", header=TRUE)
 ```
 
 
-
 ###Introduction
+
 Your document should layout your question in the introductionIntroduction, provide a brief synopsis for why it is important, 
 
 
 ###Methods
-Samples were collected from 
+PET Plastic bottles were placed in three different stations (Dowsing, Gabbard, and Warp) in the North Sea (Fig 1), and were collected in different seasons (Spring, Summer, and Winter) by Dr. Sonja Oberbeckmann, IO-Warnemuende; and Dr. Melissa Duhaime, University of Michigan. DNA was extracted from the bottles and sequenced using Illumina sequencer. Sequence data was processed by Dr. Duhaime. I received OTU tables and sample data from Dr. Duhaime. 
 
-describe how you obtained the data, your general approach to analyzing the data, 
+
+describe your general approach to analyzing the data, 
 
 
 
