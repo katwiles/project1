@@ -1,0 +1,33 @@
+---
+title: "Project 1"
+author: "Kat Wiles"
+date: "Friday, October 24, 2014"
+output: html_document
+---
+
+
+```{r, echo=FALSE}
+otu <- read.table(file="PET_otutab.tsv", header=TRUE)
+otu.taxa<-read.table(file="PET_otutable_taxa.tsv", header=TRUE)
+sample<-read.table(file="PET_sample_data.tsv", header=TRUE)
+```
+
+
+
+###Introduction
+Your document should layout your question in the introductionIntroduction, provide a brief synopsis for why it is important, 
+
+
+###Methods
+Samples were collected from 
+
+describe how you obtained the data, your general approach to analyzing the data, 
+
+
+
+###Results
+a summary of your results, 
+
+
+###Discussion
+ and mention of what your future directions would be.
