@@ -19,16 +19,51 @@ Once I learned how to phyloseq, I played around with the sample data to produce 
 
 ###Methods
 
-First 
+First I followed the [preprocessing tutorial](http://joey711.github.io/phyloseq/preprocess.html).
+
+
 
 
 ```{r, echo=FALSE}
-library("phyloseq") #load phyloseq library
-packageVersion("phyloseq") # getting version number '1.10.0'
+library("phyloseq") #load phyloseq library, version 1.10.0
 data("GlobalPatterns") #loading Global Patterns data set
+n.t<-ntaxa(GlobalPatterns) #exploring data: number of taxa
+n.s<-nsamples(GlobalPatterns) #exploring data: number of samples
+```
+
+```{r, echo=FALSE}
+#preprocessing
+gpr  <- transform_sample_counts(GlobalPatterns, function(x) x / sum(x)) #transform data to relative abundance
+gpfr <- filter_taxa(gpr, function(x) mean(x) > 1e-5, TRUE) # filter taxa so only OTUs mean greater than 10^-5kept
+gp.ch <- subset_taxa(GlobalPatterns, Phylum=="Chlamydiae") # pulling out samples in phylum Chlamidiae
+gp.ch <- prune_samples(sample_sums(gp.ch)>=20, gp.ch) #remove samples with >20 reads
+
+gp.ch.merge <- merge_taxa(gp.ch, taxa_names(gp.ch)[1:5]) #merge first 5 samples in Chlamidiae set
 
 
+gpsfbg <- subset_taxa(GlobalPatterns, Phylum =="Bacteroidetes") #pulling out Bacteriodetes #not in tutorial!!
+gpsfbg <-  prune_samples(sample_sums(gpsfbg)>=20, gpsfbg) #removing samples with >20 reads #not in tutorial
 
+gpsfbg <- tax_glom(gpsfbg, "Family") #mass Bacteriodetes only data set at rank of family
+pt<- plot_tree(gpsfbg, color="SampleType", shape="Class", size="abundance") #create annotated tree
+
+#graph not in tutorial, thus i left out of r markdown file
+
+gp.ch.fa <-transform_sample_counts(gp.ch, function(OTU) OTU/sum(OTU) )#transforming abundance to functional abundance
+
+gp <- filter_taxa(GlobalPatterns, function(x) sum(x > 3) > (0.2*length(x)), TRUE) #Remove taxa not seen more than 3 times in at least 20% of the samples. This protects against an OTU with small mean & trivially large C.V.
+
+sample_data(gp)$human <- factor( get_variable(gp, "SampleType") %in% c("Feces", "Mock", "Skin", "Tongue") ) #define human vs non-human data and add to dataset
+
+#standardizing abundances to mean sequence depth
+total <- median(sample_sums(gp))
+standf <- function(x, t=total) round(t * (x / sum(x)))
+gps <- transform_sample_counts(gp, standf)
+gpsf <- filter_taxa(gps, function(x) sd(x)/mean(x) > 3.0, TRUE) #Filter the taxa using a cutoff of 3.0 for the Coefficient of Variation
+
+gpsfb <- subset_taxa(gpsf, Phylum=="Bacteroidetes") #Subset the data to Bacteroidetes, used in some plots
 
 ```
+
+
 
