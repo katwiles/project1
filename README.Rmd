@@ -17,7 +17,7 @@ Instead of continuing with this project, I decided to scrap the whole thing and 
 Once I learned how to phyloseq, I played around with the sample data to produce some new figures and graphs. I noted where this was done. #expand upon this. 
 
 
-###Methods
+###Methods/Results
 
 First I followed the [preprocessing tutorial](http://joey711.github.io/phyloseq/preprocess.html) with the GlobalPatterns data set within phyloseq. In which samples were removed if they were not seen more than 3 times in at least 20 of the samples. I also learned how to subset samples into varying taxonomic levels. 
 
@@ -94,9 +94,10 @@ plot_richness(gp, color="SampleType", measures="Shannon")
 ```
 
 
+Next I worked through the [ordination tutorial](http://joey711.github.io/phyloseq/plot_ordination-examples.html).
 
 ```{r, echo=FALSE}
-#starting ordination
+#prepping data for ordination
 theme_set(theme_bw())
 
 #Remove OTUs that do not show appear more than 5 times in more than half the samples
@@ -118,9 +119,43 @@ gp1 <- prune_taxa((tax_table(gp1)[, "Phylum"] %in% top5phyla), gp1)
 
 human <- get_variable(gp1, "SampleType") %in% c("Feces", "Mock", "Skin", "Tongue")
 sample_data(gp1)$human <- factor(human)
+```
 
+
+Samples and OTUs were graphed together in a biplot.
+
+
+```{r, echo=FALSE}
+GP.ord <- ordinate(gp1, "NMDS", "bray")
+p1 = plot_ordination(gp1, GP.ord, type = "taxa", color = "Phylum", title = "taxa")
+print(p1)
+
+
+p1 + facet_wrap(~Phylum, 3)
+
+p2 = plot_ordination(gp1, GP.ord, type = "samples", color = "SampleType", shape = "human")
+p2 + geom_polygon(aes(fill = SampleType)) + geom_point(size = 5) + ggtitle("samples")
+
+p3 = plot_ordination(gp1, GP.ord, type = "biplot", color = "SampleType", shape = "Phylum", 
+    title = "biplot")
+# Some stuff to modify the automatic shape scale
+GP1.shape.names = get_taxa_unique(gp, "Phylum")
+GP1.shape <- 15:(15 + length(GP1.shape.names) - 1)
+names(GP1.shape) <- GP1.shape.names
+GP1.shape["samples"] <- 16
+p3 + scale_shape_manual(values = GP1.shape)
+```
+
+As you can see this brought up a suite of errors, even though I copied and pasted directly from the website, with no mention of these errors. With my unfamiliarity with the program, I was unable to fix the errors. There was mention fo a pch error, but this is not in the code for me to manipulate. 
+
+```{r}
 
 ```
+
+
+###Discussion
+
+* mention how plots not completely reproducible, how it might be hard to reproduce data that is wrapped in code, especially for a program you are unfamiliar with. 
 
 
 
