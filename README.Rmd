@@ -167,11 +167,13 @@ Lastly, I worked with heat maps to see if the data could be recreated using the 
 
 ```{r, echo=FALSE}
 #heatmap
+par(mfrow=c(1,3))
+
 gpt <- subset_taxa(GlobalPatterns, Kingdom == "Bacteria")
 gpt <- prune_taxa(names(sort(taxa_sums(gpt), TRUE)[1:300]), gpt)
 plot_heatmap(gpt, sample.label = "SampleType")
 
-gpac <- subset_taxa(GlobalPatterns, Phylum == "Crenarchaeota")#creating subset in phylum Crenarchaeota
+gpac <- subset_taxa(GlobalPatterns, Phylum == "Crenarchaeota") #creating subset in phylum Crenarchaeota
 
 plot_heatmap(gpac)
 plot_heatmap(gpac, "NMDS", "jaccard") #heatmap with ordination
@@ -179,6 +181,11 @@ plot_heatmap(gpac, "NMDS", "jaccard") #heatmap with ordination
 ```
 
 
+###Results
+
+I was able to recreate most of the plots that 
+
+ta, a summary of your results, a discussion, and mention of what your future directions would be
 
 ###Discussion
 
