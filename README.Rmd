@@ -160,9 +160,24 @@ plot_bar(gp.ch) #basic bar plot
 plot_bar(gp.ch, fill="Genus") #expanding on bar plot to fill with the different genera
 plot_bar(gp.ch, x="SampleType", fill="Genus") #group samples by where sample was from
 plot_bar(gp.ch, "Family", fill="Genus", facet_grid=~SampleType) #using facets to separate sample types
+```
 
+
+Lastly, I worked with heat maps to see if the data could be recreated using the [heat map tutorial](http://joey711.github.io/phyloseq/plot_heatmap-examples.html).
+
+```{r, echo=FALSE}
+#heatmap
+gpt <- subset_taxa(GlobalPatterns, Kingdom == "Bacteria")
+gpt <- prune_taxa(names(sort(taxa_sums(gpt), TRUE)[1:300]), gpt)
+plot_heatmap(gpt, sample.label = "SampleType")
+
+gpac <- subset_taxa(GlobalPatterns, Phylum == "Crenarchaeota")#creating subset in phylum Crenarchaeota
+
+plot_heatmap(gpac)
+plot_heatmap(gpac, "NMDS", "jaccard") #heatmap with ordination
 
 ```
+
 
 
 ###Discussion
