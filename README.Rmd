@@ -14,7 +14,7 @@ When I started on this project, I originally wanted to work with some data from 
 
 Instead of continuing with this project, I decided to scrap the whole thing and try to see if I could use the sample data on the [phyloseq website](http://joey711.github.io/phyloseq/) and reproduce many of the figures that are in the tutorial. The phyloseq package is designed to help scientists with reproducible data. I thought it would be interesting to see how reproducible their website is. This will also be useful way of learning how to use phyloseq. 
 
-Once I learned how to phyloseq, I played around with the sample data to produce some new figures and graphs. I noted where this was done. #expand upon this. 
+Once I learned how to phyloseq, I played around with the sample data to produce a few new figures and graphs. 
 
 
 ###Methods/Results
@@ -183,13 +183,22 @@ plot_heatmap(gpac, "NMDS", "jaccard") #heatmap with ordination
 
 ###Results
 
-I was able to recreate most of the plots that 
+I was able to recreate most of the plots that were on the phyloseq tutorial website, and even created a few plots of my own. However, I had a lot of difficulty and errors with the ordination plots.
 
-ta, a summary of your results, a discussion, and mention of what your future directions would be
 
 ###Discussion
 
-* mention how plots not completely reproducible, how it might be hard to reproduce data that is wrapped in code, especially for a program you are unfamiliar with. 
+This project was based on reproducibility. I wanted to test if I could reproduce some of the tutorials on the phyloseq website, and hopefully expand upon the plots a little bit. I was initially hoping by doing so, I would become more familiar with the program and try again to make plots with my data. However, I do not feel the tutorial prepared me well enough to do so, just yet. 
+
+when I had problems reproducing the ordination plots, I became frustrated because I could not figure out how to fix the plots. For example, I had a pch error. In the code visible to me, pch was not there. Hence, this brings up an issue with reproducible data when using someone eles's code. If all of the code is not visible, then it would be challenging to know what they did so you know how to fix it. It also makes it challenging to compare different versions of the code when the code is updated. 
+
+For the most part, phyloseq tutorial is reproducible. However, for the novice, there is not enough information in the tutorial to teach you how to use the program for your own data. There was a lot of preprocessing (see code in beginning) that I spent a lot of time doing, but did not use most of it. 
+
+In the future, I want learn how to use phyloseq and use it to analyze my data. There are a lot of features to import data from Mothur and Qiime that seems to be really useful. 
+
+
+
+
 
 
 
