@@ -148,7 +148,19 @@ p3 + scale_shape_manual(values = GP1.shape)
 
 As you can see this brought up a suite of errors, even though I copied and pasted directly from the website, with no mention of these errors. With my unfamiliarity with the program, I was unable to fix the errors. There was mention fo a pch error, but this is not in the code for me to manipulate. 
 
-```{r}
+Next I worked with [barplot tutorial](http://joey711.github.io/phyloseq/plot_bar-examples.html) to see if I could recreate the barplots. 
+
+```{r, echo=FALSE}
+par(mfrow=c(2,2))
+#barplots
+theme_set(theme_bw())
+gp.ch = subset_taxa(GlobalPatterns, Phylum == "Chlamydiae") #pulling out subset in phylum Chlamydiae
+
+plot_bar(gp.ch) #basic bar plot
+plot_bar(gp.ch, fill="Genus") #expanding on bar plot to fill with the different genera
+plot_bar(gp.ch, x="SampleType", fill="Genus") #group samples by where sample was from
+plot_bar(gp.ch, "Family", fill="Genus", facet_grid=~SampleType) #using facets to separate sample types
+
 
 ```
 
